@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/stores', 'ApiController@stores');
+Route::get('/storeSales/{l}', 'ApiController@storeSales');
