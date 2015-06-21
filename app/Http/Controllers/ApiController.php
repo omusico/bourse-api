@@ -25,4 +25,12 @@ class ApiController extends Controller
 
         return response()->json($storeSales);
     }
+
+    public function storeSalesById($id) {
+
+        $storeSales = RecapGlobal::find($id);
+
+        return response()->json($storeSales);
+
+    }
 }
