@@ -19,7 +19,7 @@ class ApiController extends Controller
         return response()->json($stores);
     }
 
-    public function storeSales($l) {
+    public function storeSalesByLocation($l) {
 
         $storeSales = RecapGlobal::where('magasin', '=', $l)->orderBy('id', 'desc')->get();
 
