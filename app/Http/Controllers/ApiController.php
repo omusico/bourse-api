@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Input;
 use App\Alive;
 use App\RecapGlobal;
 
@@ -31,6 +30,14 @@ class ApiController extends Controller
         $storeSales = RecapGlobal::find($id);
 
         return response()->json($storeSales);
+    }
 
+    public function storeSalesByDate() {
+
+        $date = Input::get('date');
+
+        $storeSales = RecapGlobal::where('date', '=', $date)->orderBy('id', 'desc')->get();
+
+        return response()->json($storeSales);
     }
 }
