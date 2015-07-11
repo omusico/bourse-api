@@ -40,4 +40,13 @@ class ApiController extends Controller
 
         return response()->json($storeSales);
     }
+
+    public function today() {
+
+        $date = date("d/m/Y");
+
+        $storeSales = RecapGlobal::where('date', '=', $date)->orderBy('id', 'desc')->get();
+
+        return response()->json($storeSales);
+    }
 }
