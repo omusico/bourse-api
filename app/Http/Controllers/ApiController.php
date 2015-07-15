@@ -43,10 +43,30 @@ class ApiController extends Controller
 
     public function today() {
 
-        $date = date("d/m/Y");
+        $dateToday = date("d/m/Y");
 
-        $storeSales = RecapGlobal::where('date', '=', $date)->orderBy('id', 'desc')->get();
+        //find today sales
+        $storeSalesToday = RecapGlobal::where('date', '=', $dateToday)->orderBy('id', 'desc')->get();
 
-        return response()->json($storeSales);
+        //find last week sales
+        $dateLastWeek = date('d/m/Y', strtotime("-1 week"));
+        $storeSalesLastWeek = RecapGlobal::where('date', '=', $dateLastWeek)->orderBy('id', 'desc')->get();
+
+        //find last month sales
+        $dateLastMonth = date('d/m/Y', strtotime("-1 month"));
+        $storeSalesLastMonth = RecapGlobal::where('date', '=', $dateLastMonth)->orderBy('id', 'desc')->get();
+
+        //find last year sales
+        $dateLastYear = date('d/m/Y', strtotime("-1 year"));
+        $storeSalesLastYear = RecapGlobal::where('date', '=', $dateLastYear)->orderBy('id', 'desc')->get();
+
+        $response = array(
+            "today" => $storeSalesToday,
+            "lastWeek" => $storeSalesLastWeek,
+            "lastMonth" => $storeSalesLastMonth,
+            'lastYear' => $storeSalesLastYear
+        );
+
+        return response()->json($response);
     }
 }
